@@ -1,4 +1,4 @@
-#include "pch.h"
+
 /*
 C语言实现字典：测试。
 */
@@ -39,9 +39,9 @@ struct nlist *lookup(char *s)
 char *strdup(char *s) /* make a duplicate of s */
 {
     char *p;
-    p = (char *) malloc(strlen(s)+1); /* +1 for ’\0’ */
+    p = (char *)malloc(strlen(s) + 1); /* +1 for ’\0’ */
     if (p != NULL)
-       strcpy(p, s);
+        strcpy(p, s);
     return p;
 }
 
@@ -66,11 +66,13 @@ struct nlist *install(char *name, char *defn)
 }
 
 
-
+/*"hx"，"bh","ep"散列值相同,*/
 void test(void)
 {
     struct nlist *p;
     p = install((char *)"hx", (char *)"48");
+    p = p->next;
+    p = install((char *)"bh", (char *)"56");
     p = p->next;
     p = install((char *)"swj", (char *)"22");
     p = p->next;
@@ -78,15 +80,27 @@ void test(void)
     p = p->next;
     p = install((char *)"lqs", (char *)"14");
     p = p->next;
+    p = install((char *)"ep", (char *)"21");
+    p = p->next;
     p = NULL;
 
-    p = lookup((char *)"hx");
+    p = lookup((char *)"ep");
     printf("%s\n", p->defn);
 }
 
+void test2(void)
+{
+    char x, y;
+    printf("%d  %d %d\n", 'h', 'x', ('h'*31+'x')%101);
 
+    for (x = 'a'; x <= 'z'; x++)
+        for (y = 'a'; y <= 'z'; y++)
+            if ((x * 31 + y) % 101 == 11)
+                printf("%c%c\n", x, y);
+}
 int main(void)
 {
     test();
+
     return 0;
 }
