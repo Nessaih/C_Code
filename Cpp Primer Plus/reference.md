@@ -27,3 +27,9 @@ rats = 101,rodents = 101
 rats = 102, rodents = 102
 rats address = 012FFC38, rodents  address 012FFC38
 ```
+
+请注意,下述语句中的`&`运算符不是地址运算符，而是将rodents的类型声明为`int &`，即指向`int`变量的引用
++ `int & rodents = rats; `
+
+但下述语句中的`&`运算符是地址运算符，其中的`&rodents`表示`rodents`引用的变量的地址：
++ `out << ",rodents = address" << &rodents << endl;`
